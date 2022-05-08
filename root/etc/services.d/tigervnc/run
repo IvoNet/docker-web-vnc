@@ -1,0 +1,5 @@
+#!/command/s6-env bash
+##############################################################################
+# Tiger VNC
+##############################################################################
+/usr/sbin/gosu abc vncserver -SecurityTypes None --I-KNOW-THIS-IS-INSECURE -localhost no -fg ${DISPLAY:-:1}
