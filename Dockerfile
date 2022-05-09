@@ -10,8 +10,6 @@ ENV DISPLAY=:1 \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
-    GUACD_DIR=/opt/guacd \
-    LD_LIBRARY_PATH=/opt/guacd/lib \
     DISPLAY=:1 \
     AUTH=false
 
@@ -61,10 +59,10 @@ RUN apt-get update \
     && mkdir -p /etc/guacamole/lib/ \
     && mkdir -p /etc/guacamole/disabled/ \
     && mkdir -p /etc/guacamole/extensions/ \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/temp.list /tmp/*
-
-RUN apt-get update \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/temp.list /tmp/*
+#
+#RUN apt-get update \
     && apt-get install -y -qq --no-install-recommends \
     build-essential \
     dirmngr \
@@ -90,14 +88,13 @@ RUN chmod +x /etc/cont-init.d/* \
     && gosu abc mkdir -p "/config/.config/openbox" \
     && gosu abc mkdir -p "/config/.cache/openbox/sessions" \
     && gosu abc touch /config/.Xauthority \
-    && gosu abc mkdir -p /config/.vnc \
-    && gosu abc xhost +localhost
+    && gosu abc mkdir -p /config/.vnc
 
 ENV HOME=/config
 COPY root/ /
 
-# web address
+# internal web address
 EXPOSE 32000
-# vnc address
+# internal vnc server address
 EXPOSE 5901
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-NAME=web-ui
+NAME=web-vnc
 PORT=8080
 WAIT=3
 
@@ -24,6 +24,8 @@ if [ ! "$(docker ps -q -f name=$NAME)" ]; then
             -e AUTH=true                              \
             -e USERNAME=user                          \
             -e PASSWORD=secret                        \
+            -e PUID=$(id -u $USER)                    \
+            -e PGID=$(id -g $USER)                    \
             -e PULSE_SERVER=docker.for.mac.localhost  \
             -v ~/.config/pulse:/nobody/.config/pulse  \
             -p $PORT:32000                            \

@@ -104,16 +104,16 @@ to make the application look good and give yourself some control over the workin
 
 Most of the time these variables do not need to be changed often unless you want to :-)
 
-| Variable name            | Description  | Default |
-| :----------------------- | :----------- | :------ |
-| WIDTH                    | the width of the screen displayed in the browser | `1920` |
-| HEIGHT                   | the height of the screen displayed in the browser | `1080` |
-| VNC_DEPTH                | specify the pixel depth in bits of the vnc desktop to be created. Options are 8, 15, 16 and 24. [doc](https://tigervnc.org/doc/Xvnc.html) | `24` |
-| VNC_DPI                  | the dots per inc for the vnc desktop | `96` |
-| USER_ID                  | the userid for the nobody user  | `99` |
-| GROUP_ID                 | the groupid for the nobody user | `100`|
-| DISPLAY                  | the display number used by openbox. This value probably does not need to be changed ever unless you get the following error message during startup `Openbox-Message: Failed to open the display from the DISPLAY environment variable.` then you might want to change it to `:0` or some such | `:1` |
-| SERVER_PORT              | the port on which tomcat (guacamole-client) will run. Note that if you overrule this you also overrule the exposed internal port. | `32000` |
+| Variable name | Description  | Default |
+|:--------------| :----------- | :------ |
+| WIDTH         | the width of the screen displayed in the browser | `1920` |
+| HEIGHT        | the height of the screen displayed in the browser | `1080` |
+| VNC_DEPTH     | specify the pixel depth in bits of the vnc desktop to be created. Options are 8, 15, 16 and 24. [doc](https://tigervnc.org/doc/Xvnc.html) | `24` |
+| VNC_DPI       | the dots per inc for the vnc desktop | `96` |
+| PUID          | the userid for the nobody user  | `99` |
+| PGID          | the groupid for the nobody user | `100`|
+| DISPLAY       | the display number used by openbox. This value probably does not need to be changed ever unless you get the following error message during startup `Openbox-Message: Failed to open the display from the DISPLAY environment variable.` then you might want to change it to `:0` or some such | `:1` |
+| SERVER_PORT   | the port on which tomcat (guacamole-client) will run. Note that if you overrule this you also overrule the exposed internal port. | `32000` |
 
 ## Using audio
 

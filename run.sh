@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-NAME=web-ui
+NAME=web-vnc
 PORT=8080
 if [ ! -z $1 ]; then
    EP="--entrypoint bash"
@@ -24,6 +24,8 @@ docker run                                   \
     -e AUTH=${AUTH:-false}                   \
     -e USERNAME=user                         \
     -e PASSWORD=secret                       \
+    -e PUID=$(id -u $USER)                   \
+    -e PGID=$(id -g $USER)                   \
     -e PULSE_SERVER=docker.for.mac.localhost \
     -v ~/.config/pulse:/nobody/.config/pulse \
     -p ${PORT}:32000                         \
