@@ -1,6 +1,11 @@
-# ivonet/gui docker base image
+# ivonet/web-vnc docker base image
 
 A docker **base** image for running X11 desktop (graphical) applications as a website or remote desktop.
+Technology used here is:
+- tigervncserver
+- guacamole-server and client for the web interface
+- openbox for the window management
+- custom (self made) auth and nologin java extensions for guacamole
 
 # Usage
 
@@ -12,8 +17,8 @@ Using this image as a standalone image would serve no purpose but gives you some
 You can try it out:
 
 ```bash
-docker run -d --name eyes -p 8080:32000 ivonet/gui
-docker run -it --name ui -e AUTH=false -e USERNAME=user -e PASSWORD=secret -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/nobody/.config/pulse -p 8080:32000 ivonet/web-ui
+docker run -d --name eyes -p 8080:32000 ivonet/web-vnc
+docker run -it --name ui -e AUTH=false -e USERNAME=user -e PASSWORD=secret -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/nobody/.config/pulse -p 8080:32000 ivonet/web-vnc
 ```
 
 and goto [http://localhost:8080](http://localhost:8080) to test it out.
@@ -58,7 +63,7 @@ If you want to know more about this read this [s6-overlay](https://github.com/ju
 * Create your own `Dockerfile`
 
 ```dockerfile
-FROM ivonet/web-ui:latest
+FROM ivonet/web-vnc:latest
 
 COPY root/ /
 # do your stuff here to add and configure your desktop application
@@ -185,7 +190,7 @@ Start in daemon mode with minimal options:
 docker run -d                         \
   --name gui                          \
   -p 32000:32000                      \
-  ivonet/web-ui
+  ivonet/web-vnc
 ```
 
 Start in interactive mode with lots of options:
@@ -195,6 +200,7 @@ docker run                            \
   --rm                                \
   --name gui                          \
   -p 10000:32000                      \
+  -p 5901:5901                      \
   -e AUTH=true                        \
   -e WIDTH=3440                       \
   -e HEIGHT=1440                      \
@@ -202,7 +208,7 @@ docker run                            \
   -e USERNAME=admin                   \
   -e PASSWORD=secret                  \
   -e VNC_DEPTH=24                     \
-  ivonet/web-ui
+  ivonet/web-vnc
 ```
 
 # Release Notes

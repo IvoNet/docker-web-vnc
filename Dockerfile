@@ -96,5 +96,8 @@ RUN chmod +x /etc/cont-init.d/* \
 ENV HOME=/config
 COPY root/ /
 
+# web address
 EXPOSE 32000
+# vnc address
+EXPOSE 5901
 
