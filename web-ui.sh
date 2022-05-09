@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 NAME=web-ui
 PORT=8080
+VNC_PORT=5901
 WAIT=3
 
 if [ ! "$(docker ps -q -f name=$NAME)" ]; then
@@ -26,6 +27,7 @@ if [ ! "$(docker ps -q -f name=$NAME)" ]; then
             -e PASSWORD=secret                        \
             -e PULSE_SERVER=docker.for.mac.localhost  \
             -v ~/.config/pulse:/nobody/.config/pulse  \
+            -p $VNC_PORT:5901                         \
             -p $PORT:32000                            \
             ivonet/$NAME
 

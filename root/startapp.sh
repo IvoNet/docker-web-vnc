@@ -2,5 +2,6 @@
 # Openbox default startup script
 while true;
 do
-  xeyes
+  gosu abc xclock
+  sleep 2
 done

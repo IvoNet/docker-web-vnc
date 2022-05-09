@@ -12,7 +12,8 @@ ENV DISPLAY=:1 \
     TERM="xterm" \
     GUACD_DIR=/opt/guacd \
     LD_LIBRARY_PATH=/opt/guacd/lib \
-    DISPLAY=:1
+    DISPLAY=:1 \
+    AUTH=false
 
 WORKDIR /opt
 
@@ -20,6 +21,7 @@ ENV PREFIX_DIR="/opt/guacd"
 
 RUN apt-get update \
     && apt-get install -y -qq --no-install-recommends \
+    gosu \
     libcairo2-dev \
     libjpeg-turbo8-dev \
     libpng-dev \
@@ -88,11 +90,10 @@ RUN chmod +x /etc/cont-init.d/* \
     && gosu abc mkdir -p "/config/.config/openbox" \
     && gosu abc mkdir -p "/config/.cache/openbox/sessions" \
     && gosu abc touch /config/.Xauthority \
-    && gosu abc mkdir -p /config/.vnc
+    && gosu abc mkdir -p /config/.vnc \
+    && gosu abc xhost +localhost
 
-
-# Prebuild guacamole server binaries and libs
-#COPY --from=ivonet/guacd:1.4.0 /opt/guacd /opt/guacd
+ENV HOME=/config
 COPY root/ /
 
 EXPOSE 32000

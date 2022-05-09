@@ -1,6 +1,6 @@
-# ivonet/webui-base docker base image
+# ivonet/gui docker base image
 
-A docker **base** image for running X11 desktop (graphical) applications as a website.
+A docker **base** image for running X11 desktop (graphical) applications as a website or remote desktop.
 
 # Usage
 
@@ -12,8 +12,8 @@ Using this image as a standalone image would serve no purpose but gives you some
 You can try it out:
 
 ```bash
-docker run -d --name eyes -p 8080:32000 ivonet/x11webui
-docker run -it --name ui -e AUTH=false -e USERNAME=user -e PASSWORD=secret -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/nobody/.config/pulse -p 8080:32000 ivonet/x11webui
+docker run -d --name eyes -p 8080:32000 ivonet/gui
+docker run -it --name ui -e AUTH=false -e USERNAME=user -e PASSWORD=secret -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/nobody/.config/pulse -p 8080:32000 ivonet/web-ui
 ```
 
 and goto [http://localhost:8080](http://localhost:8080) to test it out.
@@ -29,16 +29,16 @@ application of your choice.
 ```text
 root
 ├── etc
-│   ├── cont-init.d
-│   │   ├── 100-init.sh
-│   │   ├── 110-YOUR_CONFIG_HERE.sh
-│   │   ├── 120-YOUR_CONFIG_HERE_2.sh
-│   │   └── 199-cleanup.sh
-│   └── services.d
-│       ├── your_service_here
-│       │   └── run
-│       └── another_service_here
-│           └── run
+│   ├── cont-init.d
+│   │   ├── 100-init.sh
+│   │   ├── 110-YOUR_CONFIG_HERE.sh
+│   │   ├── 120-YOUR_CONFIG_HERE_2.sh
+│   │   └── 199-cleanup.sh
+│   └── services.d
+│       ├── your_service_here
+│       │   └── run
+│       └── another_service_here
+│           └── run
 └── startapp.sh
 ```
 
@@ -58,7 +58,7 @@ If you want to know more about this read this [s6-overlay](https://github.com/ju
 * Create your own `Dockerfile`
 
 ```dockerfile
-FROM ivonet/x11webui:latest
+FROM ivonet/web-ui:latest
 
 COPY root/ /
 # do your stuff here to add and configure your desktop application
@@ -185,7 +185,7 @@ Start in daemon mode with minimal options:
 docker run -d                         \
   --name gui                          \
   -p 32000:32000                      \
-  ivonet/x11webui
+  ivonet/web-ui
 ```
 
 Start in interactive mode with lots of options:
@@ -202,18 +202,10 @@ docker run                            \
   -e USERNAME=admin                   \
   -e PASSWORD=secret                  \
   -e VNC_DEPTH=24                     \
-  ivonet/x11webui
+  ivonet/web-ui
 ```
 
 # Release Notes
 
-v1.0
-- Based on ivonet/web-gui-base:1.4 but moved to its own project as the direction of development changed
-    - removed mysql as auth manager
-    - image becomes smaller
-    - added user_mapping.xml authentication
-    - added auto-login extension feature
-    - removed rdp, ssh, telnet protocols and left only vnc
-    - added lots of documentation in the scripts
-    
-
+v0.1
+- first working version
