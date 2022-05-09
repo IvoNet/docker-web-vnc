@@ -2,6 +2,7 @@
 
 A docker **base** image for running X11 desktop (graphical) applications as a website or remote desktop.
 Technology used here is:
+- Ubuntu 22.04
 - tigervncserver
 - guacamole-server and client for the web interface
 - openbox for the window management
@@ -200,7 +201,7 @@ docker run                            \
   --rm                                \
   --name gui                          \
   -p 10000:32000                      \
-  -p 5901:5901                      \
+  -p 5901:5901                        \
   -e AUTH=true                        \
   -e WIDTH=3440                       \
   -e HEIGHT=1440                      \
