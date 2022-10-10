@@ -27,6 +27,3 @@ export HOME=/nobody
 # VNC gave some warnings and this removed them...
 mkdir -p /etc/X11/xserver
 touch /etc/X11/xserver/SecurityPolicy
-
-# rights
-chown -R abc:abc /config

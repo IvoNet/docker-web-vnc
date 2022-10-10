@@ -43,6 +43,7 @@ RUN apt-get update \
     alsa-base \
     dbus \
     dbus-x11 \
+    sudo \
     x11-xserver-utils \
     openbox \
     xfonts-base \
