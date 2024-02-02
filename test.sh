@@ -18,8 +18,8 @@ if [ ! "$(docker ps -q -f name=$NAME)" ]; then
         open http://localhost:$PORT
     else
         echo "Starting new $NAME container..."
+        #-d                                        \
         docker run                                    \
-            -d                                        \
             --name $NAME                              \
             -e AUTH=true                              \
             -e USERNAME=user                          \
@@ -28,6 +28,7 @@ if [ ! "$(docker ps -q -f name=$NAME)" ]; then
             -e PGID=$(id -g $USER)                    \
             -e PULSE_SERVER=docker.for.mac.localhost  \
             -v ~/.config/pulse:/nobody/.config/pulse  \
+            -v "$(pwd)/.tmp/home:/config"                  \
             -p $PORT:32000                            \
             ivonet/$NAME
 

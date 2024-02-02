@@ -18,7 +18,8 @@ killpulse
 pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon 2>/dev/null
 
 docker run                                   \
-    -d                                      \
+    -it                                      \
+    -d                                       \
     --rm                                     \
     --name $NAME                             \
     -e AUTH=${AUTH:-false}                   \
@@ -28,14 +29,14 @@ docker run                                   \
     -e PGID=$(id -g $USER)                   \
     -e PULSE_SERVER=docker.for.mac.localhost \
     -v ~/.config/pulse:/config/.config/pulse \
-    -v "$(pwd)/.tmp/home:/config"            \
+    -v $(pwd)/.tmp/project:/project          \
     -p ${PORT}:32000                         \
-    -p 5901:5901 \
+    -p 5901:5901                             \
     $EP                                      \
     ivonet/$NAME
 #    -v $(pwd)/root/startapp.sh:/startapp.sh  \
-#    junk/x11webui
+
+
 docker logs $NAME -f
 docker rm -f $NAME
-
 killpulse

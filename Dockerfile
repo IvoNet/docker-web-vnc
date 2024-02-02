@@ -40,6 +40,7 @@ RUN apt-get update \
     libavutil-dev \
     libavformat-dev \
     pulseaudio \
+    python3-xdg \
     alsa-base \
     dbus \
     dbus-x11 \
@@ -56,23 +57,23 @@ RUN apt-get update \
     && rm -Rf /var/lib/tomcat9/webapps/ROOT \
     && mkdir -p /usr/share/tomcat9/logs/ \
     && touch /usr/share/tomcat9/logs/catalina.out \
-    && curl -s -L -o /var/lib/tomcat9/webapps/ROOT.war "https://downloads.apache.org/guacamole/1.4.0/binary/guacamole-1.4.0.war"  \
+    && curl -s -L -o /var/lib/tomcat9/webapps/ROOT.war "https://downloads.apache.org/guacamole/1.5.4/binary/guacamole-1.5.4.war"  \
     && mkdir -p /etc/guacamole/lib/ \
     && mkdir -p /etc/guacamole/disabled/ \
     && mkdir -p /etc/guacamole/extensions/ \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/temp.list /tmp/*
-#
-#RUN apt-get update \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/temp.list /tmp/*
+
+RUN apt-get update \
     && apt-get install -y -qq --no-install-recommends \
     build-essential \
     dirmngr \
     gnupg \
     gpg \
-    && wget https://downloads.apache.org/guacamole/1.4.0/source/guacamole-server-1.4.0.tar.gz \
-    && tar -xvf guacamole-server-1.4.0.tar.gz \
-    && rm -f /opt/guacamole-server-1.4.0.tar.gz \
-    && cd /opt/guacamole-server-1.4.0 \
+    && wget https://downloads.apache.org/guacamole/1.5.4/source/guacamole-server-1.5.4.tar.gz \
+    && tar -xvf guacamole-server-1.5.4.tar.gz \
+    && rm -f /opt/guacamole-server-1.5.4.tar.gz \
+    && cd /opt/guacamole-server-1.5.4 \
     && CFLAGS=-Wno-error ./configure --with-init-dir=/etc/init.d --enable-allow-freerdp-snapshots \
     && make \
     && make install \
@@ -85,15 +86,14 @@ RUN chmod +x /etc/cont-init.d/* \
     && echo "abc:abc" | chpasswd \
     && echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && mkdir /config \
-    && chown -R abc:abc /config \
-    && gosu abc mkdir -p "/config/.config/openbox" \
-    && gosu abc mkdir -p "/config/.cache/openbox/sessions" \
-    && gosu abc touch /config/.Xauthority \
-    && gosu abc mkdir -p /config/.vnc
+    && chown -R abc:abc /config
 
 ENV HOME=/config
 COPY root/ /
 
+
+WORKDIR /project
+VOLUME ["/project"]
 # internal web address
 EXPOSE 32000
 # internal vnc server address

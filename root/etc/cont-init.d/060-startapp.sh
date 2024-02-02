@@ -7,6 +7,6 @@
 ##############################################################################
 
 if [[ -e /startapp.sh ]]; then
-	chown nobody:users /startapp.sh
+	chown abc:abc /startapp.sh
 	chmod +x /startapp.sh
 fi

@@ -17,7 +17,7 @@ if [ -z $DISPLAY ]; then
     export DISPLAY=:1
 fi
 
-export HOME=/nobody
+export HOME=/config
 
 # Fix:
 # for pulseaudio
