@@ -54,6 +54,7 @@ RUN apt-get update \
     tigervnc-standalone-server \
     tomcat9 tomcat9-admin tomcat9-common tomcat9-user \
     x11-apps \
+    xterm \
     && rm -Rf /var/lib/tomcat9/webapps/ROOT \
     && mkdir -p /usr/share/tomcat9/logs/ \
     && touch /usr/share/tomcat9/logs/catalina.out \

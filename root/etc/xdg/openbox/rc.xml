@@ -258,7 +258,7 @@
     <action name="FocusToBottom"/>
     <action name="Unfocus"/>
   </keybind>
-  <keybind key="A-space">
+  <keybind key="A-m">
     <action name="ShowMenu"><menu>client-menu</menu></action>
   </keybind>
   <!-- Take a screenshot of the current window with gnome-screenshot when Alt+Print are pressed -->
@@ -366,7 +366,7 @@
     </mousebind>
     <mousebind button="A-Right" action="Drag">
       <action name="Resize"/>
-    </mousebind> 
+    </mousebind>
 
     <mousebind button="A-Middle" action="Press">
       <action name="Lower"/>
@@ -677,7 +677,7 @@
   # order that they appear in this list
 
 
-    # each rule element can be left out or set to 'default' to specify to not 
+    # each rule element can be left out or set to 'default' to specify to not
     # change that attribute of the window
 
     <decor>yes</decor>
