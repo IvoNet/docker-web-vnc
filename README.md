@@ -1,5 +1,8 @@
 # ivonet/web-vnc docker base image
 
+This is the one I should be using as a base for all my desktop applications.
+Or the x11novnc image if I want to use a web interface.
+
 A docker **base** image for running X11 desktop (graphical) applications as a website or remote desktop.
 Technology used here is:
 - Ubuntu 22.04
